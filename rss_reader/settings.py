@@ -27,16 +27,22 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+# CUSTOM KEY
+LOG_URL = os.getenv('DJANGO_LOG_FILE', 'info.log')
+PAGINATION_ADMIN_DASHBOARD = os.getenv('PAGINATION_ADMIN_DASHBOARD', 30)
+LOGIN_REDIRECT_URL = '/rss/rss/'
 # Application definition
 
 INSTALLED_APPS = [
+    'rss.apps.SuitConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rss',
+
 ]
 
 MIDDLEWARE = [
@@ -99,6 +105,38 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
+# Log
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'console': {
+            'format': '%(name)-12s %(funcName)12s %(levelname)-8s %(message)s'
+        },
+        'file': {
+            'format': '%(asctime)s %(name)-12s %(funcName)12s %(levelname)-8s %(message)s'
+        }
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'console'
+        },
+        'file': {
+            'class': 'logging.FileHandler',
+            'formatter': 'file',
+            'filename': LOG_URL,
+        }
+    },
+    'loggers': {
+        '': {
+            'level': 'INFO',
+            'handlers': ['console', 'file']
+        }
+    }
+}
 
 
 # Internationalization
