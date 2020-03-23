@@ -2,26 +2,37 @@
 ## Django Developer assignment
 ## Task
 ##### Your task is to create a Django application that is a feeds reader. The app can read feed from multiple sources and store them to database. Sample feeds http://www.feedforall.com/sample-feeds.htm.
-##### Requirements
-As a developer, I want to run a command which help me to setup database easily with one run.
+##### Requirements: As a developer
+- to run a command which help me to setup database easily with one run:
 
-As a developer, I want to run a command which accepts the feed urls (separated by comma) as argument to grab items from given urls. Duplicate items are accepted.
+    ##### Activate your virtual environment, then:
+    #####/rss_reader$ `pip install -r requirements.txt `
+    #####/rss_reader$ `python manage.py migrate`
 
-As a developer, I want to see output of the command not only in shell but also in pre-defined log file. The log file should be defined as a parameter of the application.
+- to run a command which accepts the feed urls (separated by comma) as argument to grab items from given urls. Duplicate items are accepted.
 
-As a user, I want to see the list of items which were grabbed by running the command line above, via web-based. I also should see the pagination if there are more than one page. The page size is a configurable value.
- As a user, I want to filter items by category name on list of items.
- As a user, I want to create new item manually via a form.
- As a user, I want to update/delete an item
- 
-##### How to do
+   #####/rss_reader$ `python manage.py rss --scrawl https://www.feedforall.com/sample.xml,https://www.feedforall.com/sample-feed.xml `
 
-Please make a repo on Github then share us the access.
+- to see output of the command not only in shell but also in pre-defined log file. The log file should be defined as a parameter of the application.
 
-Start coding. The application must be developed by using a Django framework and follow coding standard of the framework.
+   #####/rss_reader/settings.py `LOG_URL = os.getenv('DJANGO_LOG_FILE', 'info.log')`
 
-Use git flow to manage branches on your repository
+##### Requirements: As a user
 
-Open a pull request to master branch after done.
+    Activate your virtual environment, then:
+    /rss_reader$ python manage.py runserver
+- to see the list of items which were grabbed by running the command line above, via web-based. I also should see the pagination if there are more than one page. The page size is a configurable value.
 
-The implementation should covered by Unit Test or Functional Test.
+   #####/rss_reader/settings.py `PAGINATION_ADMIN_DASHBOARD = os.getenv('PAGINATION_ADMIN_DASHBOARD', 30)`
+
+- to filter items by category name on list of items: OK
+
+   #####visit `http://localhost:8000/rss/rss/`
+  
+- to create new item manually via a form: OK
+
+   #####visit `http://localhost:8000/rss/rss/add/`
+
+- to update/delete an item: OK
+
+   #####visit `http://localhost:8000/rss/rss/{id}/change/`
