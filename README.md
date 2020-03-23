@@ -5,6 +5,7 @@
 ##### Requirements: As a developer
 - to run a command which help me to setup database easily with one run:
 
+    ##### Activate your virtual environment, then:
     #####/rss_reader$ `pip install -r requirements.txt `
     #####/rss_reader$ `python manage.py migrate`
 
@@ -18,6 +19,8 @@
 
 ##### Requirements: As a user
 
+    Activate your virtual environment, then:
+    /rss_reader$ python manage.py runserver
 - to see the list of items which were grabbed by running the command line above, via web-based. I also should see the pagination if there are more than one page. The page size is a configurable value.
 
    #####/rss_reader/settings.py `PAGINATION_ADMIN_DASHBOARD = os.getenv('PAGINATION_ADMIN_DASHBOARD', 30)`
